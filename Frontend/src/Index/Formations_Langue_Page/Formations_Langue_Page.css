@@ -1,0 +1,12 @@
+.Formation_Page{
+    width: 100vw;
+    margin-top: 20vh;
+    height: auto;
+
+    gap: 30px;
+    background-color: #1b1a1a;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  margin-left: .5vw;
+}

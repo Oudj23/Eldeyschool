@@ -1,0 +1,32 @@
+.Lesson {
+    width: 90%;
+    height: 8vh;
+    background-color: #3E3E3E;
+    display: flex;
+    justify-content: flex-start; /* Because RTL starts from right */
+    align-items: center;
+    border-radius: 30px;
+    direction: rtl;
+    padding-right: 2vw;
+    margin-bottom: 10px;
+}
+
+.lesson-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+}
+
+.LessonIcon {
+    width: 2vw;
+    height: 4vh;
+    margin-left: 1vw;
+}
+
+.lesson_title {
+    font-size: 1rem;
+    font-weight: 200;
+    color: #ffffff;
+}

@@ -1,0 +1,17 @@
+.Student-name-serach{
+    background-color: transparent;
+    border: 1px solid rgb(160, 136, 0);
+    color: white;
+    width: 30vw;
+    height: 5vh;
+    margin-bottom: 2vh;
+    position: relative;
+    left: 60vw;
+    outline:0cap;
+    padding-left: 10px;
+}
+.Student-name-serach::placeholder{
+    background-color: transparent;
+    color: white;
+   
+}

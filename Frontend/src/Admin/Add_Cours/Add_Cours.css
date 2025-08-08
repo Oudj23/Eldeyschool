@@ -1,0 +1,229 @@
+.Add_Course_Container {
+    width: 95vw;
+    height: auto;
+    background-color: #323232;
+    border-radius: 30px;
+    margin-left: 2vw;
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.Actions-btns-container {
+    width: 90%;
+    height: 10vh;
+    padding: 2vh 2vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0);
+    border-top-right-radius: 59px;
+    border-top-left-radius: 59px;
+}
+
+/* Container for the left-side buttons */
+.left-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+/* Button style */
+.text-action {
+    color: white;
+    font-family: var(--font-sora);
+    font-size: 19px;
+    font-weight: 200;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.text-action:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Select style */
+.select {
+    width: 15vw;
+    min-width: 120px;
+    height: 4vh;
+    background-color: #3F3F3F;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding-left: 1vw;
+    font-family: var(--font-sora);
+    font-size: 16px;
+    outline: none;
+}
+.Units-container{
+    background-color: rgba(255, 255, 255, 0);
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2vh;
+    padding-right: 2vh;
+}
+.addunitform{
+    width: 50vw;
+    height: 60vh;
+    background-color: red;
+    z-index: 2;
+}
+/* Disable scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Overlay background */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal content box */
+.addunitform {
+  background-color: #2a2a2a;
+  padding: 2rem;
+  width: 50vw;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1rem;
+  color: white;
+  opacity: 0;
+  transform: translateY(-30px);
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+
+/* Form Inputs */
+.form-input {
+  width: 90%;
+  background: #444;
+  margin: 2vh;
+  border: none;
+  border-radius: 10px;
+  padding: 1rem;
+  color: white;
+  font-size: 1rem;
+}
+
+
+/* Buttons */
+.form-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.submit-button,
+.cancel-button {
+  background-color: #5c5cfc;
+  border: none;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.cancel-button {
+  background-color: #ff4c4c;
+}
+
+.submit-button:hover {
+  background-color: #4949e0;
+}
+
+.cancel-button:hover {
+  background-color: #e04444;
+}
+
+/* Slide + Fade Animation */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: white;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #444;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.checkbox-group label:hover {
+  background-color: #555;
+}
+
+.checkbox-group input[type="checkbox"] {
+  transform: scale(1.2);
+}
+.unit-with-lessons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.lessons-dropdown {
+  width: 95%;
+  background: #3E3E3E;
+      display: flex;
+      flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+  border-radius: 0 5px 5px 0;
+  border-radius: 30px;
+  margin-bottom: 3vh;
+}
+
+.lessons-dropdown ul {
+  margin: 0;
+  width: 100%;
+  border-radius: 30px;
+}
+
+.lessons-dropdown li {
+  margin-bottom: 5px;
+}
+.lesson-link{
+  color: white;
+  text-decoration: none;
+  width: 100%;
+}

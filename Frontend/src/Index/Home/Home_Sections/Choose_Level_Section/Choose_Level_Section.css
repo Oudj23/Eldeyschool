@@ -1,0 +1,50 @@
+.Choose_Level_Section{
+    background-color: black;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.Choose_Level_Section_Title{
+     color: white;
+    font-family: var(--font-sora);
+    font-weight: 700;
+}
+.Level-container{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+/* Tablets (up to 1024px) */
+@media screen and (max-width: 1024px) {
+  .Level-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+  }
+
+  .Choose_Level_Section_Title {
+    font-size: 26px;
+    text-align: center;
+    margin: 20px 0;
+  }
+}
+
+/* Phones (up to 768px) */
+@media screen and (max-width: 768px) {
+  .Level-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding: 20px 0;
+  }
+
+  .Choose_Level_Section_Title {
+    font-size: 22px;
+    padding: 10px 20px;
+    text-align: center;
+  }
+}

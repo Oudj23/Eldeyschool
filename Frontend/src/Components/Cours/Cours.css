@@ -1,0 +1,84 @@
+.Cours {
+    width: 15vw;
+    height: 20vh;
+    background-color: rgb(34, 32, 32);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.Cours-img-container {
+    width: 3vw;
+    height: 6vh;
+    border-radius: 8px;
+    background-color: rgb(52, 51, 51);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Cours-img {
+    width: 70%;
+}
+
+.Cours-Title {
+    color: white;
+    font-family: var(--font-sora);
+    font-size: 19px;
+    font-weight: 800;
+    text-align: center;
+}
+
+/* Media Queries */
+
+@media (max-width: 1024px) {
+    .Cours {
+        width: 25vw;
+        height: 22vh;
+    }
+
+    .Cours-img-container {
+        width: 5vw;
+        height: 6vh;
+    }
+
+    .Cours-Title {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 768px) {
+    .Cours {
+        width: 40vw;
+        height: 22vh;
+    }
+
+    .Cours-img-container {
+        width: 8vw;
+        height: 6vh;
+    }
+
+    .Cours-Title {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Cours {
+        width: 85vw;
+        height: 22vh;
+    }
+
+    .Cours-img-container {
+        width: 16vw;
+        height: 7vh;
+    }
+
+    .Cours-Title {
+        font-size: 15px;
+    }
+}

@@ -1,0 +1,73 @@
+.Level{
+    width: 15vw;
+    height: 20vh;
+    background-color: rgb(34, 32, 32);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+     margin-top: 8vh;
+     margin-bottom: 8vh;
+}
+.Level-img-container{
+    width: 3vw;
+    height: 6vh;
+    border-radius: 8px;
+    background-color: rgb(52, 51, 51);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.Level-img{
+    width:70%
+}
+.Level-Title{
+    color: white;
+    font-family: var(--font-sora);
+    font-size: 19px;
+    font-weight: 800;
+}
+/* Tablets (up to 1024px) */
+@media screen and (max-width: 1024px) {
+  .Level {
+    width: 30vw;
+    height: 22vh;
+  }
+
+  .Level-img-container {
+    width: 6vw;
+    height: 6vh;
+  }
+
+  .Level-Title {
+    font-size: 17px;
+  }
+}
+
+/* Phones (up to 768px) */
+@media screen and (max-width: 768px) {
+  .Level {
+    width: 80vw;
+    height: auto;
+    padding: 20px 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .Level-img-container {
+    width: 15vw;
+    height: 7vh;
+  }
+
+  .Level-img {
+    width: 50%;
+  }
+
+  .Level-Title {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+  }
+}

@@ -1,0 +1,124 @@
+.Header-Container {
+    width: 40%;
+    height: 7vh;
+    z-index: 5;
+    border-radius: 50px;
+    background: #0000004d; /* translucent black */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    position: fixed;
+    top: 5vh;
+    left: 30%;
+    border: 1px solid rgba(255, 255, 255, 0.721);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Header-Links{
+    color: white;
+    text-decoration: none;
+    color: white;
+    font-family: var(--font-sora);
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 20px;
+}
+.Header-Dropdown {
+    position: relative;
+}
+.Icon{
+  width:10%;
+  margin-top: 1vh;
+  margin-left: 2vw;
+}
+.Dropdown-Content {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 10px;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    min-width: 160px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 100;
+}
+
+.Dropdown-Content a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 300;
+    font-family: var(--font-sora);
+    transition: background 0.2s;
+}
+
+.Dropdown-Content a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+/* Tablets (up to 1024px) */
+@media screen and (max-width: 1024px) {
+  .Header-Container {
+    width: 60%;
+    left: 25%;
+    height: 8vh;
+    padding: 0 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .Header-Links {
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .Dropdown-Content {
+    min-width: 140px;
+    padding: 8px 0;
+  }
+
+  .Dropdown-Content a {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+}
+
+/* Phones (up to 768px) */
+@media screen and (max-width: 768px) {
+  .Header-Container {
+    width: 100%;
+    left: 0%;
+    flex-wrap: wrap;
+    height: auto;
+    margin-top: -5%;
+    padding: 10px;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .Header-Links {
+    font-size: 10px;
+    margin: 2px 4px;
+  }
+
+  .Dropdown-Content {
+    position: static; /* allow it to stay inside layout */
+    min-width: auto;
+    width: 100%;
+    margin-top: 5px;
+    padding: 8px 0;
+    text-align: center;
+  }
+
+  .Dropdown-Content a {
+    font-size: 13px;
+    padding: 8px 10px;
+    display: inline-block;
+  }
+}
