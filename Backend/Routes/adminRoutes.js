@@ -20,7 +20,9 @@ router.delete('/delete/:id', AdminController.deleteStudent);
 router.put('/update/:id', AdminController.updateStudent);
 router.post('/create-lesson', upload.single('content'), lessonController.createLesson);
 router.post('/login',UserController.login)
-
+app.get('/test', (req, res) => {
+  res.json({ message: "Test route works ✅" });
+});
 // Example Express route
 router.get('/get-lessons/:unitId', async (req, res) => {
   const { unitId } = req.params;
