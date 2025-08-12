@@ -6,11 +6,7 @@ const Student = require('../Models/Student');
 const lessonController = require('../controllers/lessonController');
 const upload = require('../Middlewares/multer');
 const Lesson = require('../Models/Lesson'); // ✅ Import the Lesson model
-const app = express()
 const UserController = require('../controllers/UserController')
-app.use(express.json()); // ✅ MUST be before any routes
-
-app.use(express.urlencoded({ extended: true }));
 router.post('/add', AdminController.createStudent);
 router.get('/showstudents', AdminController.showstudents);
 
