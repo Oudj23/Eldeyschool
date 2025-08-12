@@ -54,7 +54,7 @@ useEffect(() => {
 
   const fetchUnits = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/admin/get-units');
+      const res = await fetch('https://eldeyschoolbackend.onrender.com/api/admin/get-units');
       const data = await res.json();
       setUnits(data.units);
     } catch (error) {
@@ -70,7 +70,7 @@ useEffect(() => {
     }
 
     try {
-      const res = await fetch('http://localhost:3000/api/admin/create-unit', {
+      const res = await fetch('https://eldeyschoolbackend.onrender.com/api/admin/create-unit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ Unitname: trimmedName, selectedLevels })
@@ -93,7 +93,7 @@ useEffect(() => {
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/api/admin/get-lessons/${unitId}`);
+      const res = await fetch(`https://eldeyschoolbackend.onrender.com/api/admin/get-lessons/${unitId}`);
       const data = await res.json();
       console.log("Lessons fetched for unit:", unitId, data); // ✅ Add this
 
@@ -128,7 +128,7 @@ useEffect(() => {
     }
 
     try {
-      const res = await fetch('http://localhost:3000/api/admin/create-lesson', {
+      const res = await fetch('https://eldeyschoolbackend.onrender.com/api/admin/create-lesson', {
         method: 'POST',
         body: formData
       });

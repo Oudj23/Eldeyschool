@@ -52,7 +52,7 @@ function Add_Student() {
     const delayDebounce = setTimeout(() => {
       const fetchSearch = async () => {
         try {
-          const res = await axios.get(`http://localhost:3000/api/admin/search?name=${searchTerm}`);
+          const res = await axios.get(`https://eldeyschoolbackend.onrender.com/api/admin/search?name=${searchTerm}`);
           setStudents(res.data);
         } catch (err) {
           console.error('Erreur lors de la recherche:', err);
@@ -64,7 +64,7 @@ function Add_Student() {
       } else {
         // Reload all if search is cleared
         const fetchStudents = async () => {
-          const res = await axios.get('http://localhost:3000/api/admin/showstudents');
+          const res = await axios.get('https://eldeyschoolbackend.onrender.com/api/admin/showstudents');
           setStudents(res.data);
         };
         fetchStudents();
@@ -76,7 +76,7 @@ function Add_Student() {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/api/admin/showstudents');
+        const res = await axios.get('https://eldeyschoolbackend.onrender.com/api/admin/showstudents');
         setStudents(res.data);
       } catch (err) {
         console.error('Erreur lors de la récupération des étudiants:', err);
@@ -126,12 +126,12 @@ function Add_Student() {
     setLoading(true);
     try {
       if (editingId) {
-        const res = await axios.put(`http://localhost:3000/api/admin/update/${editingId}`, formData);
+        const res = await axios.put(`https://eldeyschoolbackend.onrender.com/api/admin/update/${editingId}`, formData);
         setStudents((prev) =>
           prev.map((s) => (s._id === editingId ? res.data : s))
         );
       } else {
-        const res = await axios.post('http://localhost:3000/api/admin/add', formData);
+        const res = await axios.post('https://eldeyschoolbackend.onrender.com/api/admin/add', formData);
         setStudents((prev) => [...prev, res.data]);
       }
       setFormData({ Nom_Prénom: '', Email: '', Classe: '', Téléphone: '', Password: '' });
@@ -146,7 +146,7 @@ function Add_Student() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/admin/delete/${id}`);
+      await axios.delete(`https://eldeyschoolbackend.onrender.com/api/admin/delete/${id}`);
       setStudents((prev) => prev.filter((s) => s._id !== id));
     } catch (err) {
       alert('Erreur lors de la suppression');

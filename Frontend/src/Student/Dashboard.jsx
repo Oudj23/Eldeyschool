@@ -33,7 +33,7 @@ useEffect(() => {
 
   const fetchUnits = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/admin/get-units');
+      const res = await fetch('https://eldeyschoolbackend.onrender.com/api/admin/get-units');
       const data = await res.json();
       setUnits(data.units);
     } catch (error) {
@@ -62,7 +62,7 @@ useEffect(() => {
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/api/admin/get-lessons/${unitId}`);
+      const res = await fetch(`https://eldeyschoolbackend.onrender.com/api/admin/get-lessons/${unitId}`);
       const data = await res.json();
       setLessons(prev => ({ ...prev, [unitId]: data.lessons }));
       setExpandedUnit(unitId);
