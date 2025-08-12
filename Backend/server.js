@@ -5,7 +5,7 @@ require('dotenv').config(); // Load .env variables
 const path = require('path');
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ limit: '100mb', extended: true }));
-app.use(express.static(path.join(__dirname, 'dist', 'index.html')));
+app.use(express.static(path.join(__dirname, 'dist')));
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -18,7 +18,7 @@ require('./Config/db');
 const adminRoutes = require('./Routes/adminRoutes');
 app.use('/api/admin', adminRoutes);
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 // Start server
 const PORT = process.env.PORT ;
