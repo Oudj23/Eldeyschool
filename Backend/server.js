@@ -13,6 +13,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // DB connection
 require('./Config/db');
+app.get('/test', (req, res) => {
+  res.json({ message: "Test route works ✅" });
+});
 
 // Admin Routes
 const adminRoutes = require('./Routes/adminRoutes');
