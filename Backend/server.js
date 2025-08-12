@@ -18,7 +18,7 @@ const adminRoutes = require('./Routes/adminRoutes');
 app.use('/api/admin', adminRoutes);
 
 // ✅ Serve frontend static files
-app.use(express.static(path.join(__dirname, 'Frontend/dist')));
+app.use(express.static(path.join(__dirname, '../Frontend/dist')));
 
 // ✅ Handle frontend routes (React Router)
 app.get('*', (req, res) => {
