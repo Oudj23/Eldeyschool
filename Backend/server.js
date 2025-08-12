@@ -1,27 +1,28 @@
 const express = require('express');
 const cors = require('cors');
-const app = express();
-require('dotenv').config(); // Load .env variables
+const path = require('path');
+require('dotenv').config();
 
-app.use(express.json({ limit: '100mb' }));
-app.use(express.urlencoded({ limit: '100mb', extended: true }));
+const app = express();
 
 // Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ limit: '100mb', extended: true }));
 
 // DB connection
 require('./Config/db');
 
-// Admin Routes
+// Routes
 const adminRoutes = require('./Routes/adminRoutes');
 app.use('/api/admin', adminRoutes);
 
-// ✅ Handle undefined routes (Not Found)
-const path = require('path');
-app.use('*', (req, res) => {
-  res.status(404).json({ message: 'Route not found' });
+// ✅ Serve frontend static files
+app.use(express.static(path.join(__dirname, 'Frontend/dist')));
+
+// ✅ Handle frontend routes (React Router)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'Frontend/dist/index.html'));
 });
 
 // Start server
