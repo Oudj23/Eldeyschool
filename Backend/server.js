@@ -18,11 +18,11 @@ const adminRoutes = require('./Routes/adminRoutes');
 app.use('/api/admin', adminRoutes);
 
 // ✅ Serve static files from /dist
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname,'Frontend','dist')));
 
 // ✅ Fallback to index.html for SPA routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'Frontend','dist', 'index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
