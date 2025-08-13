@@ -34,6 +34,7 @@ function App() {
         <Route path='user/dashboard' element={<Dashboard/>}/>
         
       </Routes>
+      <Route path='*'element={<h1>Page not found please check the path</h1>}/>
     </div>
   );
 }
