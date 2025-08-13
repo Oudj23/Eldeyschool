@@ -1,29 +1,29 @@
 const express = require('express');
 const cors = require('cors');
-const app = express();
 const path = require('path');
 require('dotenv').config(); // Load .env variables
 
-app.use(express.json({ limit: '100mb' }));
-app.use(express.urlencoded({ limit: '100mb', extended: true }));
-app.use(express.static(path.join(__dirname, '../Frontend/dist')));
-// Middleware
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middlewares
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 
-// DB connection
-require('./Config/db');
+// Serve static files from the frontend build
+app.use(express.static(path.join(__dirname, '../Frontend/dist')));
 
-// Admin Routes
+// API routes
 const adminRoutes = require('./Routes/adminRoutes');
 app.use('/api/admin', adminRoutes);
+
+// 🔥 Catch-all: Serve index.html for any other route (support React Router)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../Frontend/dist/index.html'));
 });
 
 // Start server
-const PORT = process.env.PORT ;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
