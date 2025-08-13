@@ -1,6 +1,6 @@
 import React from 'react';
 import Index from './Index/Index'
-import {Routes,Route} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import './Style_Variables/Font.css'
 import Home from './Index/Home/Home';
@@ -19,22 +19,25 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Index />} >
-          <Route index element={<Home/>}/>
-          <Route path='/formations/langues-etrangeres' element={<Formation_Langue_Page/>}/>
-          <Route path='formations/professionnel' element={<Formation_Professionel/>}/>
-          <Route path='Niveaux/Primaire' element={<Primaire/>}/>
-          <Route path='/Niveaux/Cem' element={<Cem/>}/>
-          <Route path='/Niveaux/Lycée' element={<Lycée/>}/>
-        <Route path='/Connexion' element={<Connexion/>}/>
+          <Route index element={<Home />} />
+          <Route path='formations/langues-etrangeres' element={<Formation_Langue_Page />} />
+          <Route path='formations/professionnel' element={<Formation_Professionel />} />
+          <Route path='Niveaux/Primaire' element={<Primaire />} />
+          <Route path='Niveaux/Cem' element={<Cem />} />
+          <Route path='Niveaux/Lycée' element={<Lycée />} />
+          <Route path='Connexion' element={<Connexion />} />
         </Route>
-        <Route path='/admin' element={<Admin_Dashboard/>}>
-            <Route path='student'  element={<Add_Student/>}/>
-            <Route path='cours'  element={<Add_Cours/>}/>
+
+        <Route path="/admin" element={<Admin_Dashboard />}>
+          <Route path="student" element={<Add_Student />} />
+          <Route path="cours" element={<Add_Cours />} />
         </Route>
-        <Route path='user/dashboard' element={<Dashboard/>}/>
-        
+
+        <Route path="/user/dashboard" element={<Dashboard />} />
+
+        {/* ✅ Correct fallback route */}
+        <Route path="*" element={<h1>Page not found. Please check the path.</h1>} />
       </Routes>
-      <Route path='*'element={<h1>Page not found please check the path</h1>}/>
     </div>
   );
 }

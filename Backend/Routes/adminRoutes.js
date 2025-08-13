@@ -1,5 +1,6 @@
 const express = require('express');
-const router = express.Router();
+// In adminRoutes.js, change the first line to:
+const router = require('express').Router({ strict: true });
 const AdminController = require('../controllers/adminController');
 const UnitController = require('../controllers/UnitController');
 const Student = require('../Models/Student');
