@@ -1,15 +1,14 @@
 const express = require('express');
 const cors = require('cors');
-const app = express();
-require('dotenv').config(); // Load .env variables
+const path = require('path');
+require('dotenv').config();
 
-app.use(express.json({ limit: '100mb' }));
-app.use(express.urlencoded({ limit: '100mb', extended: true }));
+const app = express();
 
 // Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ limit: '100mb', extended: true }));
 
 // DB connection
 require('./Config/db');
@@ -17,8 +16,16 @@ require('./Config/db');
 // Admin Routes
 const adminRoutes = require('./Routes/adminRoutes');
 app.use('/api/admin', adminRoutes);
-// Start server
-const PORT = process.env.PORT ;
+
+// ✅ Serve static files from /dist
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// ✅ Fallback to index.html for SPA routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
