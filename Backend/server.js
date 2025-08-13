@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const path = require('path');
 require('dotenv').config(); // Load .env variables
 
 app.use(express.json({ limit: '100mb' }));
@@ -18,7 +17,6 @@ require('./Config/db');
 // Admin Routes
 const adminRoutes = require('./Routes/adminRoutes');
 app.use('/api/admin', adminRoutes);
-
 // Start server
 const PORT = process.env.PORT ;
 app.listen(PORT, () => {
