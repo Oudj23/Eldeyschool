@@ -18,11 +18,11 @@ app.use('/api/admin', adminRoutes);
 
 
 // Serve static files from React build folder
-app.use(express.static(path.join(__dirname, 'Frontend/dist')));
+app.use(express.static(path.join(__dirname, '../Frontend/dist')));
 
 // Handle React routing, return all requests to React app
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Frontend/dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '../Frontend/dist', 'index.html'));
 });
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
