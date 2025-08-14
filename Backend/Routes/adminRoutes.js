@@ -9,6 +9,7 @@ const upload = require('../Middlewares/multer');
 const Lesson = require('../Models/Lesson'); // ✅ Import the Lesson model
 const UserController = require('../controllers/UserController')
 const path = require('path');
+const app = express()
 router.post('/add', AdminController.createStudent);
 router.get('/showstudents', AdminController.showstudents);
 console.log('Registering routes...');
