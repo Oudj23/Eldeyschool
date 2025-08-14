@@ -8,8 +8,6 @@ const lessonController = require('../controllers/lessonController');
 const upload = require('../Middlewares/multer');
 const Lesson = require('../Models/Lesson'); // ✅ Import the Lesson model
 const UserController = require('../controllers/UserController')
-const path = require('path');
-const app = express()
 router.post('/add', AdminController.createStudent);
 router.get('/showstudents', AdminController.showstudents);
 console.log('Registering routes...');
@@ -32,13 +30,6 @@ router.get('/get-lessons/:unitId', async (req, res) => {
 });
 
 
-// Serve static files from React build folder
-app.use(express.static(path.join(__dirname, 'Frontend/dist')));
-
-// Handle React routing, return all requests to React app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Frontend/dist', 'index.html'));
-});
 router.get('/search', async (req, res) => {
   const { name } = req.query;
 
@@ -50,6 +41,7 @@ router.get('/search', async (req, res) => {
     res.status(500).json({ error: 'Erreur serveur lors de la recherche.' });
   }
 });
+
 
 
 
