@@ -8,6 +8,7 @@ const lessonController = require('../controllers/lessonController');
 const upload = require('../Middlewares/multer');
 const Lesson = require('../Models/Lesson'); // ✅ Import the Lesson model
 const UserController = require('../controllers/UserController')
+const path = require('path');
 router.post('/add', AdminController.createStudent);
 router.get('/showstudents', AdminController.showstudents);
 console.log('Registering routes...');
@@ -30,6 +31,13 @@ router.get('/get-lessons/:unitId', async (req, res) => {
 });
 
 
+// Serve static files from React build folder
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// Handle React routing, return all requests to React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 router.get('/search', async (req, res) => {
   const { name } = req.query;
 
