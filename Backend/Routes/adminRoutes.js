@@ -32,11 +32,11 @@ router.get('/get-lessons/:unitId', async (req, res) => {
 
 
 // Serve static files from React build folder
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'Frontend/dist')));
 
 // Handle React routing, return all requests to React app
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'Frontend/dist', 'index.html'));
 });
 router.get('/search', async (req, res) => {
   const { name } = req.query;
