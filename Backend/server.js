@@ -18,7 +18,7 @@ const adminRoutes = require('./Routes/adminRoutes');
 app.use('/api/admin', adminRoutes);
 
 // Serve static files from the copied build directory
-const frontendPath = path.join(__dirname, 'dist');
+const frontendPath = path.join(__dirname, '../Frontend/dist');
 app.use(express.static(frontendPath));
 
 // Handle client-side routing
