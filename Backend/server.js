@@ -17,14 +17,30 @@ require('./Config/db');
 const adminRoutes = require('./Routes/adminRoutes');
 app.use('/api/admin', adminRoutes);
 
-// Serve static files from the copied build directory
-const frontendPath = path.join(__dirname, '../Frontend/dist');
-app.use(express.static(frontendPath));
+// Static files - try both possible build locations
+const possiblePaths = [
+  path.join(__dirname, '../Frontend/dist'),
+  path.join(__dirname, '../Frontend/build')
+];
 
-// Handle client-side routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(frontendPath, 'index.html'));
-});
+let frontendPath = null;
+for (const p of possiblePaths) {
+  try {
+    require('fs').accessSync(path.join(p, 'index.html'));
+    frontendPath = p;
+    console.log(`Serving frontend from: ${p}`);
+    break;
+  } catch (e) {}
+}
+
+if (frontendPath) {
+  app.use(express.static(frontendPath));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendPath, 'index.html'));
+  });
+} else {
+  console.error('Frontend build not found in either location');
+}
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
