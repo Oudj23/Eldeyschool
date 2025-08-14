@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Connexion.css';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 function Connexion() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,10 +16,9 @@ function Connexion() {
             const data = await response.json();
 
             if (response.ok) {
-                alert('Login successful');
-                localStorage.setItem('deyschooltoken', data.token); // Store token
-                navigate('/user/dashboard')
-                // Redirect or update UI as needed
+                localStorage.setItem('deyschooltoken', data.token);
+                // Use replace instead of navigate to prevent history stack issues
+                window.location.href = '/user/dashboard'; // Full page reload
             } else {
                 alert(data.message);
             }
@@ -28,7 +27,6 @@ function Connexion() {
             alert('An error occurred during login');
         }
     };
-
     return (
         <div className='Connexion-Container'>
             <div className='Connexion-Box'>
