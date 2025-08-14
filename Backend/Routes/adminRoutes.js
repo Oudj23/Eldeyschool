@@ -1,6 +1,6 @@
 const express = require('express');
 // In adminRoutes.js, change the first line to:
-const router = require('express').Router({ strict: true });
+const router = require('express').Router();
 const AdminController = require('../controllers/adminController');
 const UnitController = require('../controllers/UnitController');
 const Student = require('../Models/Student');
@@ -10,7 +10,7 @@ const Lesson = require('../Models/Lesson'); // ✅ Import the Lesson model
 const UserController = require('../controllers/UserController')
 router.post('/add', AdminController.createStudent);
 router.get('/showstudents', AdminController.showstudents);
-
+console.log('Registering routes...');
 router.post('/create-unit', UnitController.createUnit);
 router.get('/get-units', UnitController.getUnits);
 router.delete('/delete/:id', AdminController.deleteStudent);
