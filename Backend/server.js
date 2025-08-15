@@ -4,8 +4,7 @@ const path = require('path')
 require('dotenv').config();
 
 const app = express();
-const mime = require('mime');
-mime.define({ 'text/css': ['css'] }); // optional if Express is configured wrong
+
 // Middleware
 app.use(cors());
 app.use(express.json({ limit: '100mb' }));
