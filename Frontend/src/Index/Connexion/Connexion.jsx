@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Connexion.css';
 import { useNavigate } from 'react-router-dom'
+
 function Connexion() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    // ✅ Check if token exists on component mount
+    useEffect(() => {
+        const token = localStorage.getItem('deyschooltoken');
+        if (token) {
+            navigate('/user/dashboard');
+        }
+    }, [navigate]);
+
     const handleLogin = async () => {
         try {
             const response = await fetch('https://eldeyschoolbackend.onrender.com/api/admin/login', {
@@ -17,8 +27,7 @@ function Connexion() {
 
             if (response.ok) {
                 localStorage.setItem('deyschooltoken', data.token);
-                // Use replace instead of navigate to prevent history stack issues
-                navigate('/user/dashboard'); // Full page reload
+                navigate('/user/dashboard');
             } else {
                 alert(data.message);
             }
@@ -27,6 +36,7 @@ function Connexion() {
             alert('An error occurred during login');
         }
     };
+
     return (
         <div className='Connexion-Container'>
             <div className='Connexion-Box'>
