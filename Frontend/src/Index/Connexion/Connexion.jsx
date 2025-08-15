@@ -18,7 +18,7 @@ function Connexion() {
             if (response.ok) {
                 localStorage.setItem('deyschooltoken', data.token);
                 // Use replace instead of navigate to prevent history stack issues
-                window.location.href = '/user/dashboard'; // Full page reload
+                navigate('/user/dashboard'); // Full page reload
             } else {
                 alert(data.message);
             }
