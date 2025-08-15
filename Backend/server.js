@@ -12,7 +12,7 @@ app.use(express.urlencoded({ limit: '100mb', extended: true }));
 
 // DB
 require('./Config/db');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // Routes
 const adminRoutes = require('./Routes/adminRoutes');
