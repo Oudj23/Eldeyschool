@@ -24,29 +24,3 @@
   color: #ffffff;
   margin-right: 1vw;
 }
-@media (max-width: 768px) {
- 
-
-    .UnitImg {
-        width: 8vw;
-        max-width: 30px;
-    }
-
-    .Unit-title {
-        font-size: 1rem;
-        margin-right: 2vw;
-    }
-}
-
-@media (max-width: 480px) {
-    
-
-    .UnitImg {
-        margin: 0 0 1vh 0;
-    }
-
-    .Unit-title {
-        font-size: 0.95rem;
-        margin-right: 0;
-    }
-}
