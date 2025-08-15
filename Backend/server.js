@@ -12,7 +12,8 @@ app.use(express.urlencoded({ limit: '100mb', extended: true }));
 
 // DB
 require('./Config/db');
-app.use(express.static(path.join(__dirname, '../Frontend/dist')));
+app.use('/assets', express.static(path.join(__dirname, '../Frontend/dist/assets')));
+app.use(express.static(path.join(__dirname, '../Frontend/dist')))
 
 // Routes
 const adminRoutes = require('./Routes/adminRoutes');
