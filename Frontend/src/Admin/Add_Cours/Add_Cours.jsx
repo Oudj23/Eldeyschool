@@ -18,28 +18,33 @@ function Add_Cours() {
   const [lessonType, setLessonType] = useState(''); // 'pdf' or 'youtube'
   const [selectedUnitId, setSelectedUnitId] = useState('');
   const [lessonYearFilter, setLessonYearFilter] = useState('');
-   
+  const [editUnitModal, setEditUnitModal] = useState(false);
+  const [unitBeingEdited, setUnitBeingEdited] = useState(null); // holds { id, name, levels }
+  const [editUnitName, setEditUnitName] = useState('');
+  const [editUnitLevels, setEditUnitLevels] = useState([]);
+
+
   const navigate = useNavigate();
 
-useEffect(() => {
-  const token = localStorage.getItem('deyschooltoken');
+  useEffect(() => {
+    const token = localStorage.getItem('deyschooltoken');
 
-  if (!token) {
-    navigate('/connexion');
-    return;
-  }
-
-  try {
-    const decoded = jwtDecode(token);
-    if (decoded.Role !== 'admin') {
-      navigate('/user/dashboard'); // Redirect students to their dashboard
+    if (!token) {
+      navigate('/connexion');
+      return;
     }
-  } catch (error) {
-    console.error('Invalid token');
-    localStorage.removeItem('deyschooltoken');
-    navigate('/connexion');
-  }
-}, [navigate]);
+
+    try {
+      const decoded = jwtDecode(token);
+      if (decoded.Role !== 'admin') {
+        navigate('/user/dashboard'); // Redirect students to their dashboard
+      }
+    } catch (error) {
+      console.error('Invalid token');
+      localStorage.removeItem('deyschooltoken');
+      navigate('/connexion');
+    }
+  }, [navigate]);
 
 
   const toggleAddUnit = () => setAddUnitOpen(prev => !prev);
@@ -76,7 +81,13 @@ useEffect(() => {
         body: JSON.stringify({ Unitname: trimmedName, selectedLevels })
       });
 
-      await res.json();
+      const data = await res.json();
+      if (!res.ok) {
+        console.error('Server responded with error:', data);
+        alert(data.message || 'Failed to add unit');
+        return;
+      }
+
       setUnitName('');
       setSelectedLevels([]);
       setAddUnitOpen(false);
@@ -86,55 +97,61 @@ useEffect(() => {
     }
   };
   const handleDeleteUnit = async (unitId) => {
-  if (!window.confirm('Are you sure you want to delete this unit?')) return;
+    if (!window.confirm('Are you sure you want to delete this unit?')) return;
 
-  try {
-    const response = await fetch(`https://eldeyschoolbackend.onrender.com/api/admin/units/${unitId}`, {
-      method: 'DELETE',
-    });
+    try {
+      const response = await fetch(`https://eldeyschoolbackend.onrender.com/api/admin/units/${unitId}`, {
+        method: 'DELETE',
+      });
 
-    const data = await response.json();
-    if (response.ok) {
-      alert(data.message);
-      fetchUnits(); // refresh unit list
-    } else {
-      console.error(data.message);
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message);
+        fetchUnits(); // refresh unit list
+      } else {
+        console.error(data.message);
+      }
+    } catch (err) {
+      console.error('Error deleting unit:', err);
     }
-  } catch (err) {
-    console.error('Error deleting unit:', err);
-  }
-};
+  };
 
-const handleEditUnit = async (unitId, oldName, oldLevels) => {
-  const newName = prompt('Enter new unit name:', oldName);
-  if (!newName || newName.trim() === '') return;
-
-  const levelInput = prompt('Enter comma-separated levels (e.g., 1AS,2M):', oldLevels.join(','));
-  if (!levelInput || levelInput.trim() === '') return;
-
-  const newLevels = levelInput.split(',').map(lvl => lvl.trim());
-
-  try {
-    const response = await fetch(`https://eldeyschoolbackend.onrender.com/api/admin/units/${unitId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        Unitname: newName.trim(),
-        selectedLevels: newLevels
-      })
-    });
-
-    const data = await response.json();
-    if (response.ok) {
-      alert(data.message);
-      fetchUnits(); // refresh
-    } else {
-      console.error(data.message);
+  const handleEditUnit = (unitId, oldName, oldLevels) => {
+    setEditUnitModal(true);
+    setUnitBeingEdited({ id: unitId });
+    setEditUnitName(oldName);
+    setEditUnitLevels(oldLevels);
+  };
+  const submitEditUnit = async () => {
+    if (!editUnitName.trim() || editUnitLevels.length === 0) {
+      alert('Please fill in all fields');
+      return;
     }
-  } catch (err) {
-    console.error('Error updating unit:', err);
-  }
-};
+
+    try {
+      const response = await fetch(`https://eldeyschoolbackend.onrender.com/api/admin/units/${unitBeingEdited.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          Unitname: editUnitName.trim(),
+          selectedLevels: editUnitLevels
+        })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message);
+        fetchUnits();
+        setEditUnitModal(false);
+      } else {
+        console.error(data.message);
+        alert('Failed to update unit.');
+      }
+    } catch (err) {
+      console.error('Error updating unit:', err);
+    }
+  };
+
 
   const fetchLessonsForUnit = async (unitId) => {
     if (lessons[unitId]) {
@@ -211,6 +228,48 @@ const handleEditUnit = async (unitId, oldName, oldLevels) => {
 
   return (
     <div className='Add_Course_Container'>
+      {editUnitModal && (
+        <div className="modal-overlay" style={{ zIndex: 2 }}>
+          <div className="addunitform animated-form">
+            <h2>Edit Unit</h2>
+            <input
+              type="text"
+              placeholder="Unit title"
+              className="form-input"
+              value={editUnitName}
+              onChange={(e) => setEditUnitName(e.target.value)}
+            />
+
+            <div className="checkbox-group">
+              {["1AS", "2S", "2M", "2MT", "3S", "3M", "3MT"].map((level) => (
+                <label key={level}>
+                  <input
+                    type="checkbox"
+                    value={level}
+                    checked={editUnitLevels.includes(level)}
+                    onChange={(e) => {
+                      const { value, checked } = e.target;
+                      setEditUnitLevels((prev) =>
+                        checked ? [...prev, value] : prev.filter((lvl) => lvl !== value)
+                      );
+                    }}
+                  />
+                  {level}
+                </label>
+              ))}
+            </div>
+
+            <div className="form-buttons">
+              <button className="submit-button" onClick={submitEditUnit}>
+                Save
+              </button>
+              <button className="cancel-button" onClick={() => setEditUnitModal(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Add Unit Modal */}
       {addUnitOpen && (
@@ -365,7 +424,7 @@ const handleEditUnit = async (unitId, oldName, oldLevels) => {
             <div key={unit._id} className="unit-with-lessons">
 
               <div onClick={() => fetchLessonsForUnit(unit._id)}>
-                <Unit title={unit.Unitname} onEdit={() => handleEditUnit(unit._id, unit.Unitname, unit.Levels.split(','))}  onDelete={() => handleDeleteUnit(unit._id)}/>
+                <Unit title={unit.Unitname} onEdit={() => handleEditUnit(unit._id, unit.Unitname, unit.Levels.split(','))} onDelete={() => handleDeleteUnit(unit._id)} />
               </div>
 
               {expandedUnit === unit._id && (
