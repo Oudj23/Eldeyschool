@@ -85,6 +85,56 @@ useEffect(() => {
       console.error('Error submitting unit:', error);
     }
   };
+  const handleDeleteUnit = async (unitId) => {
+  if (!window.confirm('Are you sure you want to delete this unit?')) return;
+
+  try {
+    const response = await fetch(`https://eldeyschoolbackend.onrender.com/api/admin/units/${unitId}`, {
+      method: 'DELETE',
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      alert(data.message);
+      fetchUnits(); // refresh unit list
+    } else {
+      console.error(data.message);
+    }
+  } catch (err) {
+    console.error('Error deleting unit:', err);
+  }
+};
+
+const handleEditUnit = async (unitId, oldName, oldLevels) => {
+  const newName = prompt('Enter new unit name:', oldName);
+  if (!newName || newName.trim() === '') return;
+
+  const levelInput = prompt('Enter comma-separated levels (e.g., 1AS,2M):', oldLevels.join(','));
+  if (!levelInput || levelInput.trim() === '') return;
+
+  const newLevels = levelInput.split(',').map(lvl => lvl.trim());
+
+  try {
+    const response = await fetch(`https://eldeyschoolbackend.onrender.com/api/admin/units/${unitId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        Unitname: newName.trim(),
+        selectedLevels: newLevels
+      })
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      alert(data.message);
+      fetchUnits(); // refresh
+    } else {
+      console.error(data.message);
+    }
+  } catch (err) {
+    console.error('Error updating unit:', err);
+  }
+};
 
   const fetchLessonsForUnit = async (unitId) => {
     if (lessons[unitId]) {
@@ -315,7 +365,7 @@ useEffect(() => {
             <div key={unit._id} className="unit-with-lessons">
 
               <div onClick={() => fetchLessonsForUnit(unit._id)}>
-                <Unit title={unit.Unitname} />
+                <Unit title={unit.Unitname} onEdit={() => handleEditUnit(unit._id, unit.Unitname, unit.Levels.split(','))}  onDelete={() => handleDeleteUnit(unit._id)}/>
               </div>
 
               {expandedUnit === unit._id && (
