@@ -358,8 +358,12 @@ function Add_Cours() {
               >
                 <option value="">Select Class</option>
                 <option value="1AS">1AS</option>
+                <option value="2S">2S</option>
                 <option value="2M">2M</option>
+                <option value="2MT">2MT</option>
+                <option value="3S">3S</option>
                 <option value="3M">3M</option>
+                <option value="3MT">3MT</option>
               </select>
 
               <select
